@@ -1,0 +1,64 @@
+<!-- Toolbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" routerLink="/app/home">Student Management System</a>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li routerLinkActive="active" class="nav-item">
+        <a class="nav-link" routerLink="/app/home">Home</a>
+      </li>
+      <li routerLinkActive="active" class="nav-item">
+        <a class="nav-link" routerLink="/app/home/students">Students</a>
+      </li>
+      <li routerLinkActive="active" class="nav-item">
+        <a class="nav-link" routerLink="/app/home/student">Create Student</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <button (click)="userLogout()" class="btn btn-outline-light my-2 my-sm-0">Logout</button>
+    </form>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="card-counter primary">
+        <i class="fa fa-code-fork"></i>
+        <span class="count-numbers">{{users}}</span>
+        <span class="count-name">Users</span>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card-counter danger">
+        <i class="fa fa-ticket"></i>
+        <span class="count-numbers">{{students}}</span>
+        <span class="count-name">Students</span>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card-counter success">
+        <i class="fa fa-database"></i>
+        <span class="count-numbers">{{Sections}}</span>
+        <span class="count-name">Sections</span>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card-counter info">
+        <i class="fa fa-users"></i>
+        <span class="count-numbers">{{Courses}}</span>
+        <span class="count-name">Courses</span>
+      </div>
+    </div>
+  </div>
+</div>
+<notifier-container></notifier-container>
+<router-outlet></router-outlet>
+
+

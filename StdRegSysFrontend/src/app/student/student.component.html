@@ -1,0 +1,77 @@
+<div style="margin-top: 100px" class="container">
+  <div class="row">
+    <div style="margin: auto" class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="text-center">Registered Students</h4>
+        </div>
+
+        <div class="card-body" style="margin: auto">
+          <div class="row-fluid">
+            <div class="">
+              <div class="table table-responsive table-striped table-bordered table-hover">
+                <table style="vertical-align: baseline">
+                  <tr class="text-center">
+                    <th>Student Id</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Gender</th>
+                    <th>DOB</th>
+                    <th>Actions</th>
+                  </tr>
+                  <tr aria-colspan="6" *ngIf="studentInfo?.length <= 0"> <span class="text-center">No records to show</span> </tr>
+
+                  <tr *ngFor="let student of (studentInfo) | paginate: {itemsPerPage: count, currentPage: p}">
+                    <td>{{student['studentDetail'].std_ID}}</td>
+                    <td>{{student['studentDetail'].name}}</td>
+                    <td>{{student['studentDetail'].email}}</td>
+                    <td>{{student['studentDetail'].gender}}</td>
+                    <td>{{student['studentDetail'].date}}</td>
+                    <td>
+                      <button class="action-button" mat-icon-button [matMenuTriggerFor]="actionsMenu">
+                        <mat-icon class="mat-icon-alignment" style="position: unset">menu</mat-icon>
+                      </button>
+                      <mat-menu #actionsMenu="matMenu">
+                          <button mat-menu-item (click)="showCourses(student)">
+                            <mat-icon class="mat-icon-alignment"
+                                      style="position: unset; float: none;">assignment
+                            </mat-icon>
+                            <span>{{ "View Courses"}}</span>
+                          </button>
+                          <button mat-menu-item (click)="Update(student)">
+                            <mat-icon class="mat-icon-alignment"
+                                      style="position: unset; float: none;">edit
+                            </mat-icon>
+                            <span>{{ "Update" }}</span>
+                          </button>
+                          <button mat-menu-item (click)="Delete(student)">
+                            <mat-icon class="mat-icon-alignment"
+                                      style="position: unset; float: none;">delete
+                            </mat-icon>
+                            <span>{{ "Delete" }}</span>
+                          </button>
+                      </mat-menu>
+                    </td>
+<!--                    <td>-->
+<!--                      <div>-->
+<!--                        <button (click)="showCourses(student)" class="btn btn-danger">View Courses</button>-->
+<!--                        - -->
+<!--                        <button (click)="Update(student)" class="btn btn-info">Update</button>-->
+<!--                        - -->
+<!--                        <button (click)="Delete(student)" class="btn btn-danger">Delete</button>-->
+<!--                      </div>-->
+<!--                    </td>-->
+                  </tr>
+                </table>
+
+              </div>
+              <div>
+                <pagination-controls *ngIf="studentInfo?.length > 0" class="text-center" (pageChange)="p = $event"></pagination-controls>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
