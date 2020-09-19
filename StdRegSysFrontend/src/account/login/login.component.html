@@ -5,12 +5,37 @@
       <div class="account-wall">
         <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
              alt="">
-        <form class="form-signin">
-          <input [(ngModel)]="user.email" name="email" type="text" class="form-control" placeholder="Email" required autofocus>
-          <input [(ngModel)]="user.password" name="password" type="password" class="form-control" placeholder="Password" required>
-          <button (click)="login()" class="btn btn-lg btn-primary btn-block" type="submit">
-            Sign in</button>
-        </form>
+
+        <ng-container *ngIf="!isSignUp; else signUP">
+          <form class="form-signin" #from="ngForm">
+            <input *ngIf="isSignUp" [(ngModel)]="user.name" name="name" type="text" class="form-control" placeholder="User Name" required autofocus>
+            <input [(ngModel)]="user.email" name="email" type="text" class="form-control" placeholder="Email" required autofocus>
+            <input [(ngModel)]="user.password" name="password" type="password"
+                   class="form-control" placeholder="Password" minlength="8" required
+            >
+            <button [disabled]="!from.form.valid" (click)="login()" class="btn btn-lg btn-primary btn-block" type="submit">
+              Sign in</button>
+          </form>
+          <p *ngIf="!isSignUp" class="text-center signUp" (click)="isSignUp = !isSignUp">Create an account</p>
+          <p *ngIf="isSignUp" class="text-center signUp" (click)="isSignUp = !isSignUp">Already an account</p>
+        </ng-container>
+
+<!--        //Login-->
+        <ng-template #signUP>
+          <form class="form-signin" #from="ngForm">
+            <input  [(ngModel)]="user.name" name="name" type="text" class="form-control" placeholder="User Name" required autofocus>
+            <input [(ngModel)]="user.email" name="email" type="text" class="form-control" placeholder="Email" required autofocus>
+            <input [(ngModel)]="user.password" name="password" type="password"
+                   class="form-control" placeholder="Password" minlength="8" required
+            >
+            <mat-error *ngIf="user.password.length < 8">Password must be atleast 8 digit
+            </mat-error>
+            <button [disabled]="!from.form.valid" (click)="login()" class="btn btn-lg btn-primary btn-block" type="submit">
+              Sign up</button>
+          </form>
+          <p *ngIf="isSignUp" class="text-center signUp" (click)="isSignUp = !isSignUp">Already an account</p>
+        </ng-template>
+
       </div>
     </div>
   </div>

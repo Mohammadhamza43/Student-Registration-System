@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AccountRoutingModule } from './account-routing.module';
 import { LoginComponent } from './login/login.component';
 import {FormsModule} from '@angular/forms';
+import {AngularMaterialModule} from '../app/angular-material/angular-material.module';
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import {FormsModule} from '@angular/forms';
     CommonModule,
     AccountRoutingModule,
     FormsModule,
+    AngularMaterialModule,
   ]
 })
 export class AccountModule { }
