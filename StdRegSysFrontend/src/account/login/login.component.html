@@ -7,13 +7,13 @@
              alt="">
 
         <ng-container *ngIf="!isSignUp; else signUP">
-          <form class="form-signin" #from="ngForm">
+          <form class="form-signin" #Loginfrom="ngForm">
             <input *ngIf="isSignUp" [(ngModel)]="user.name" name="name" type="text" class="form-control" placeholder="User Name" required autofocus>
             <input [(ngModel)]="user.email" name="email" type="text" class="form-control" placeholder="Email" required autofocus>
             <input [(ngModel)]="user.password" name="password" type="password"
                    class="form-control" placeholder="Password" minlength="8" required
             >
-            <button [disabled]="!from.form.valid" (click)="login()" class="btn btn-lg btn-primary btn-block" type="submit">
+            <button [disabled]="!Loginfrom.form.valid" (click)="login()" class="btn btn-lg btn-primary btn-block" type="submit">
               Sign in</button>
           </form>
           <p *ngIf="!isSignUp" class="text-center signUp" (click)="isSignUp = !isSignUp">Create an account</p>
@@ -22,15 +22,33 @@
 
 <!--        //Login-->
         <ng-template #signUP>
-          <form class="form-signin" #from="ngForm">
-            <input  [(ngModel)]="user.name" name="name" type="text" class="form-control" placeholder="User Name" required autofocus>
-            <input [(ngModel)]="user.email" name="email" type="text" class="form-control" placeholder="Email" required autofocus>
-            <input [(ngModel)]="user.password" name="password" type="password"
+          <form class="form-signin" #SignUpfrom="ngForm">
+            <input  [(ngModel)]="user.name" name="name" #name="ngModel" type="text" class="form-control" placeholder="User Name" required autofocus>
+            <div *ngIf="name.invalid && (name.dirty || name.touched)"
+                 class="alert alert-danger">
+                Name is required.
+            </div>
+
+            <input [(ngModel)]="user.email" name="email" #email="ngModel" type="text" class="form-control" placeholder="Email"
+                   required
+                   autofocus [pattern]="emailPattern">
+            <div *ngIf="email.invalid && (email.dirty || email.touched)"
+                 class="alert alert-danger">
+              Invalid Email Address.
+            </div>
+            <input [(ngModel)]="user.password" #password="ngModel" name="password" type="password"
                    class="form-control" placeholder="Password" minlength="8" required
             >
-            <mat-error *ngIf="user.password.length < 8">Password must be atleast 8 digit
-            </mat-error>
-            <button [disabled]="!from.form.valid" (click)="login()" class="btn btn-lg btn-primary btn-block" type="submit">
+            <div *ngIf="password.invalid && (password.dirty || password.touched)"
+                 class="alert alert-danger">
+              <div *ngIf="password.errors.required">
+                password is required.
+              </div>
+              <div *ngIf="password.errors.minlength">
+                password must be atleast 8 character long
+              </div>
+            </div>
+            <button [disabled]="!SignUpfrom.form.valid" (click)="login()" class="btn btn-lg btn-primary btn-block" type="submit">
               Sign up</button>
           </form>
           <p *ngIf="isSignUp" class="text-center signUp" (click)="isSignUp = !isSignUp">Already an account</p>

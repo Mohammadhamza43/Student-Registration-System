@@ -25,6 +25,7 @@
                          [(ngModel)]="student.email" required minlength="2"
                          maxlength="32" [pattern]="emailPattern"
                   />
+                  <mat-error *ngIf="true">Invalid email address</mat-error>
                 </mat-form-field>
               </div>
               <div class="col-md-6">

@@ -13,6 +13,7 @@ import {take} from 'rxjs/operators';
 export class LoginComponent implements OnInit {
   user = new User();
   isSignUp = false;
+  emailPattern = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
 
   constructor(
     private loginService: LoginService,
