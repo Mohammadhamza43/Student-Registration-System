@@ -1,3 +1,3 @@
 export class AppConsts {
-  static remoteServiceBaseUrl = 'http://localhost:3000';
+  static remoteServiceBaseUrl = 'http://192.168.0.103:3001';
 }
